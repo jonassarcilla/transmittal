@@ -64,14 +64,12 @@ const transmittalListStackStyles = {
 const transmittalDetailsStackStyles = {
     root: {
         alignItems: 'start',
-        background: 'green',
+        background: '#fff',
         color: DefaultPalette.white,
         display: 'flex',
         justifyContent: 'start',
         overflowX: 'auto',
-        height:'100vh',
-        minWidth: 100,
-        padding: '10px'
+        // height:'100vh',
     }
 }
 

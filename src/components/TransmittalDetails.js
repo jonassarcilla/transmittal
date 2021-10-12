@@ -5,6 +5,8 @@ const stackStyles = {
     root: {
       background: DefaultPalette.themeTertiary,
       height: '100vh',
+      width: '100',
+      padding: '10px'
     },
   };
   const stackItemStyles = {
@@ -35,7 +37,7 @@ const TransmittalDetails = () => {
             <Stack.Item>
                 Documents Table
             </Stack.Item>
-            <Stack.Item>
+            <Stack.Item disableShrink>
                 Disclaimer
                 <p>
                     ** The user agrees to use the drawings/data only for the purpose for which it was develop by Aurecon. A user of Aurecon drawings/data in electronic format accepts the associated risk of using it without taking reasonable measures to verify the accuracy thereof against the original un-editable version, available from Aurecon. Any discrepancy between the drawings/data and the contract shall be finally decided by the Engineer/Principal
