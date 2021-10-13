@@ -1,11 +1,11 @@
 import React from 'react'
 
 const headerStyles = {
-    backgroundColor: '#dcdcdc',
+    backgroundColor: '#fefefe',
     color: '#000',
     width: '100%',
     borderTop: '8px solid #313f51',
-    borderBottom: '1px solid #eaeaea'
+    borderBottom: '3px solid #f7f7f7'
 }
 
 const labelStyles = {
@@ -17,7 +17,7 @@ const labelStyles = {
 
 const PageHeader = () => {
     return (
-        <div className="ms-Grid-col" style={headerStyles}>
+        <div style={headerStyles}>
            <h2 style={labelStyles}>Welcome, Kimberley Morrison</h2>
         </div>
     )

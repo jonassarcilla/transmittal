@@ -22,28 +22,18 @@ const stackStyles = {
 
 const TransmittalDetails = () => {
     return (
-        <Stack styles={stackStyles}>
-            <Stack.Item>
-                <Stack horizontal>
-                    <Stack.Item align='start'>Company Logo</Stack.Item>
-                    <Stack.Item align='end'>Print Page</Stack.Item>
-                </Stack>
-            </Stack.Item>
-            <Stack.Item>
-                <Stack>
-                    Doecument Details
-                </Stack>
-            </Stack.Item>
-            <Stack.Item>
-                Documents Table
-            </Stack.Item>
-            <Stack.Item disableShrink>
-                Disclaimer
-                <p>
-                    ** The user agrees to use the drawings/data only for the purpose for which it was develop by Aurecon. A user of Aurecon drawings/data in electronic format accepts the associated risk of using it without taking reasonable measures to verify the accuracy thereof against the original un-editable version, available from Aurecon. Any discrepancy between the drawings/data and the contract shall be finally decided by the Engineer/Principal
-                </p>
-            </Stack.Item>
-        </Stack>
+        <div class="d-flex flex-column bd-highlight" style={{ height: '91vh' }}>
+            <header class="p-2 d-flex justify-content-between">
+                <div>Company Logo</div>
+                <div>Print Page</div>
+            </header>
+            <section class="p-2 bd-highlight">Transmittal Details</section>
+            <section class="p-2 bd-highlight flex-fill">Documents Table</section>
+            <footer class="p-2 bd-highlight">
+                <p>Disclaimer</p>
+                <cite>** The user agrees to use the drawings/data only for the purpose for which it was develop by Aurecon. A user of Aurecon drawings/data in electronic format accepts the associated risk of using it without taking reasonable measures to verify the accuracy thereof against the original un-editable version, available from Aurecon. Any discrepancy between the drawings/data and the contract shall be finally decided by the Engineer/Principal</cite>
+            </footer>
+        </div>
     )
 }
 

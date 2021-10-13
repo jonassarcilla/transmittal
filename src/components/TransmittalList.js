@@ -20,7 +20,7 @@ const people = [
 
 const TransmittalList = () => {
     return (
-        <Stack style={{ width: '250px', height: '100vh', backgroundColor: '#fff'}}>
+        <Stack style={{ width: '250px', height: '91vh', backgroundColor: '#fff', overflowY: 'auto'}}>
             <DocumentCard>
                 <DocumentCardDetails>
                 <DocumentCardTitle title="Kimberley Morrisson" shouldTruncate />
