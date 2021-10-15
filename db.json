@@ -1,0 +1,65 @@
+{
+    "recipients": [
+        {
+            "id": "1",
+            "uniqueId": "0000-0000-0000",
+            "firstName": "Kimberly",
+            "lastName": "Morrisson",
+            "email": "kimberly.morrison@email.com"
+        },
+        {
+            "id": "2",
+            "uniqueId": "0000-0000-0000",
+            "firstName": "John",
+            "lastName": "Doe",
+            "email": "john.doe@email.com"
+        }
+    ],
+    "projects": [
+        {
+            "id": "1",
+            "uniqueId": "0000-0000-0000",
+            "title": "Aurecon Master Space"
+        }
+    ],
+    "transmittals": [
+        {
+            "projectId": "1",
+            "id": "1",
+            "transmittalNo": "0000-0000-0000",
+            "subject": "UI Review of Transmittal",
+            "message": "Message"
+        },
+        {
+            "projectId": "1",
+            "id": "2",
+            "transmittalNo": "0000-0000-0000",
+            "subject": "UI Review of Transmittal",
+            "message": "Message"
+        }
+    ],
+    "documents": [
+        {
+            "transmittalId": "1",
+            "id": "1",
+            "fileName": "P000-000-DTR-000",
+            "title": "Doc Title",
+            "rev": "rev 0",
+            "state": "SHR",
+            "status": "PC Approved For",
+            "size": "20",
+            "filepath": "https://www.google.com/"
+        },
+        {
+            "transmittalId": "1",
+            "id": "2",
+            "fileName": "P000-000-DTR-000",
+            "title": "Doc Title",
+            "rev": "rev 0",
+            "state": "SHR",
+            "status": "PC Approved For",
+            "size": "20",
+            "filepath": "https://www.google.com/"
+        }
+    ]
+}
