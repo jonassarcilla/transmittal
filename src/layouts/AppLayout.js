@@ -15,11 +15,11 @@ const AppLayout = () => {
             </header>
             <main class="d-flex flex-column" style={{ height: '100vh', overflow: 'hidden'}}>
                 <div class="d-flex align-items-stretch" style={{ height: '100vh', overflow: 'hidden' }}>
-                    <aside>
+                    <aside style={{ borderRight: '1px solid gainsboro'}}>
                         <ProjectNavigation/>
                     </aside>
 
-                    <section>
+                    <section style={{ borderRight: '1px solid gainsboro'}}>
                         <TransmittalList/>
                     </section>
 

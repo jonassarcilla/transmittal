@@ -1,5 +1,5 @@
 import React from 'react'
-import { Label, IconButton, Image, ImageFit } from '@fluentui/react';
+import { Label, IconButton, ActionButton, Image, ImageFit } from '@fluentui/react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import company_logo from '../images/company_logo.png';
 import qrcode_logo from '../images/QR_Code.png';
@@ -144,7 +144,9 @@ const TransmittalDetails = () => {
             <section class="flex-fill">
               <div className="d-flex justify-content-between align-items-center">
                 <Label style={{fontSize: 16 }}>Documents</Label>
-                <IconButton className="printDocument" iconProps={{iconName: 'DownloadDocument'}} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false} />
+                <ActionButton className="printDocument" iconProps={{iconName: 'DownloadDocument'}} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false}>
+                  Download All
+                </ActionButton>
               </div>
               <BootstrapTable wrapperClasses="documentTable" keyField="id" data={ documents } columns={ columns } />
             </section>

@@ -1,0 +1,44 @@
+#transmittalList{
+    width: 250px;
+    height: 91vh;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+#transmittalList .list-group .preview-header h5,
+#transmittalList .list-group .preview-header p,
+#transmittalList .list-group .preview-header-date {
+    font-size: 16px;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 175px;
+}
+
+#transmittalList .list-group .preview-header p {
+    color: #7bb703;
+    font-weight:400;
+}
+
+#transmittalList .list-group .preview-header-date {
+    font-size: 10px;
+}
+
+#transmittalList .list-group .preview-content h6,
+#transmittalList .list-group .preview-content p {
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#transmittalList .list-group .preview-content h6 {
+    font-weight: bolder;
+}
+
+#transmittalList .list-group-item-light.list-group-item-action.active {
+    color: #fff;
+    background-color: #313f51;
+    border-color: #313f51;
+}

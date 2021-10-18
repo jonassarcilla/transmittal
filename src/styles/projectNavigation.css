@@ -1,0 +1,63 @@
+#projectNavigation .projectList {
+    height: 86vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+#projectNavigation .projectHead {
+    /* max-width: 250px; */
+}
+
+#projectNavigation .projectHead label {
+    margin: 0;
+    padding: 5px;
+    font-size: 18px;
+    color: #393939;
+}
+
+#projectNavigation .projectHead .btn {
+    background: none;
+    border: none;
+    border-radius: 0;
+    box-shadow:none;
+}
+
+#projectNavigation .projectHead .btn:hover{
+    background: #313f51;
+}
+
+#projectNavigation .projectHead .btn svg {
+    font-size: 20px;
+}
+
+#projectNavigation .projectList .list-group.collapse {
+    min-width: 250px;
+}
+
+#projectNavigation .projectList .list-group.collapse .projectName {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 180px;
+}
+
+#projectNavigation .projectList .list-group-item-primary.list-group-item-action {
+    color: #313f51;
+    background-color: transparent;
+    border-color: transparent;
+    border: none;
+}
+
+#projectNavigation .projectList .list-group-item-primary.list-group-item-action.active {
+    background-color: rgba(49,63,81, 0.2);
+    border-left: 3px solid #313f51;
+    font-weight: 600;
+}
+
+#projectNavigation .projectList .list-group-item-primary.list-group-item-action .badge {
+    background-color: rgba(49,63,81, 0.5);
+}
+
+#projectNavigation .projectList .list-group-item-primary.list-group-item-action.active .badge {
+    background-color: rgba(49,63,81, 1);
+}
