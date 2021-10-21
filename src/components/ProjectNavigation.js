@@ -1,32 +1,51 @@
-import React, {useState} from 'react'
-import { Label, initializeIcons } from '@fluentui/react'
-import { Button, Row, Col, ListGroup, Tab, Badge, Collapse  } from 'react-bootstrap';
-import { FiChevronsLeft } from "react-icons/fi";
+import React, { memo, useState, useContext, useEffect }  from 'react'
+import { UserContext } from '../contexts/UserContext';
+import requests from "../services/requests";
+
+import { Label } from '@fluentui/react'
+import { Button, Row, Col, ListGroup, Tab, Badge, Collapse, Placeholder, Stack } from 'react-bootstrap';
+import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import '../styles/projectNavigation.css';
 
-const projectList = [
-    {
-        id: 1,
-        projectName: 'Aurecon Master',
-        transmittalCount: 8
-    },
-    {
-        id: 2,
-        projectName: 'Aurecon Demo Space',
-        transmittalCount: 1
-    },
-    {
-        id: 3,
-        projectName: 'Aurecon Master Longer Name',
-        transmittalCount: 1000
-    }
-];
-
-const ProjectNavigation = () => {
-    initializeIcons();
+const ProjectNavigation = ({ user }) => {
+    const [userInfoContext, setUserInfoContext] = useContext(UserContext);
 
     const [open, setOpen] = useState(true);
-    
+    const [projectNavigation, setProjectNavigation] = useState({ isLoading: true, projectList: [] });
+
+    const getProjectsData = (userInfo) => {
+        requests.getProjects(userInfo.id).then((response) => {
+            setProjectNavigation({ isLoading: false, projectList: response.data });
+
+            if(response.data.length > 0){
+                setUserInfoContext({...userInfoContext, selectedProject: response.data[0].id});
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
+
+    const selectProject = (event, id) => {
+        const activeProjects = document.getElementsByClassName("list-group-item-primary active");
+
+        for (var i = 0; i < activeProjects.length; i++) {
+            activeProjects[i].classList.remove("active");
+        }
+
+        event.target.closest(".list-group-item-primary").className += " active";
+
+        setUserInfoContext({...userInfoContext, selectedProject: id});
+    }
+
+    if(user.isLoading === false 
+            && user.userInfo !== null 
+            && projectNavigation.isLoading == true)
+    {
+        const userInfo = user.userInfo;
+        getProjectsData(userInfo);
+    }
+
     return (
         <div id="projectNavigation" class="d-flex flex-column">
             <div className="projectHead">
@@ -37,40 +56,53 @@ const ProjectNavigation = () => {
                     <Button
                         variant="outline-dark"
                         onClick={() => setOpen(!open)}
-                        // aria-controls="example-collapse-text"
                         aria-expanded={open}
                     >
-                        <FiChevronsLeft/>
+                        {(() => {
+                            if (open == true) {
+                                return <FiChevronsLeft/>
+                            } else {
+                                return <FiChevronsRight/>
+                            }
+                        })()}
                     </Button>
+                    
                 </div>
             </div>
             <div className="projectList">
-                <Tab.Container defaultActiveKey="#link1">
+                <Tab.Container>
                     <Row>
                         <Col>
                             <Collapse in={open} dimension="width" style={{ minWidth: 250 }}>
-                                <ListGroup variant="flush">
-                                    {projectList.map(({ id, projectName, transmittalCount }) => (
-                                        <ListGroup.Item action href={ "#project-" + id } variant="primary">
-                                            <div class="d-flex justify-content-between">
-                                                <div className="projectName">{projectName}</div>
-                                                <Badge bg="dark">{transmittalCount}</Badge>
-                                            </div>
-                                        </ListGroup.Item>
-                                    ))}
-                                </ListGroup>
+                                {(() => {
+                                    if (projectNavigation.isLoading == true) {
+                                        return <Placeholder as="p" animation="wave" className="mt-2">
+                                                    <Stack direction="horizontal" gap={1}>
+                                                        <Placeholder xs={8} size="lg" bg="secondary" className="mx-3"/>
+                                                        <Placeholder xs={1} size="lg" bg="primary" className="mx-3" />
+                                                    </Stack>
+                                                </Placeholder>
+                                                
+                                    } else {
+                                        return <ListGroup variant="flush">
+                                            {   
+                                                projectNavigation.projectList.map(({ id, title, transmittalCount }, index) => (
+                                                    <ListGroup.Item variant="primary"
+                                                        onClick={(event) => selectProject(event, id)}
+                                                        className={`${index == 0 ? "active" : ""}`}
+                                                    >
+                                                        <div class="d-flex justify-content-between">
+                                                            <div className="projectName">{title}</div>
+                                                            <Badge bg="dark">{transmittalCount}</Badge>
+                                                        </div>
+                                                    </ListGroup.Item>
+                                                ))
+                                            }
+                                        </ListGroup>
+                                    }
+                                })()}
                             </Collapse>
                         </Col>
-                        {/* <Col sm={8}>
-                        <Tab.Content>
-                            <Tab.Pane eventKey="#link1">
-                                This is tab 1
-                            </Tab.Pane>
-                            <Tab.Pane eventKey="#link2">
-                                This is tab 2
-                            </Tab.Pane>
-                        </Tab.Content>
-                        </Col> */}
                     </Row>
                 </Tab.Container>
             </div>
@@ -78,4 +110,4 @@ const ProjectNavigation = () => {
     )
 }
 
-export default ProjectNavigation
+export default memo(ProjectNavigation)

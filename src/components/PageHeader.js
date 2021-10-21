@@ -1,26 +1,26 @@
-import React from 'react'
+import React, { memo } from 'react'
+import { Placeholder } from 'react-bootstrap';
+import '../styles/pageHeader.css'
 
-const headerStyles = {
-    backgroundColor: '#fefefe',
-    color: '#000',
-    width: '100%',
-    borderTop: '8px solid #313f51',
-    borderBottom: '3px solid #f7f7f7'
-}
-
-const labelStyles = {
-    margin: '0',
-    padding: '10px 5px',
-    fontWeight: 'normal',
-    color: '#393939'
-}
-
-const PageHeader = () => {
+const PageHeader = ({ user }) => {
     return (
-        <div style={headerStyles}>
-           <h2 style={labelStyles}>Welcome, Kimberley Morrison</h2>
+        <div id="pageHeader">
+            {(() => {
+                const userInfo = user.userInfo;
+
+                if (userInfo == null || user.isLoading == true) {
+                    return <Placeholder as="p" animation="wave">
+                                <Placeholder xs={6} size="lg" bg="secondary" className="mx-3 mt-3"/>
+                           </Placeholder>
+                } else {
+                    const firstName = userInfo.firstName || null,
+                          lastName = userInfo.lastName || null;
+
+                    return <h2>Welcome, {firstName} {lastName}</h2>
+                }
+            })()}
         </div>
     )
 }
 
-export default PageHeader
+export default memo(PageHeader)

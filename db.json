@@ -1,15 +1,15 @@
 {
-    "recipients": [
+    "users": [
         {
             "id": "1",
-            "uniqueId": "0000-0000-0000",
+            "uniqueId": "0000-0000-0001",
             "firstName": "Kimberly",
             "lastName": "Morrisson",
             "email": "kimberly.morrison@email.com"
         },
         {
             "id": "2",
-            "uniqueId": "0000-0000-0000",
+            "uniqueId": "0000-0000-0002",
             "firstName": "John",
             "lastName": "Doe",
             "email": "john.doe@email.com"
@@ -18,48 +18,114 @@
     "projects": [
         {
             "id": "1",
-            "uniqueId": "0000-0000-0000",
-            "title": "Aurecon Master Space"
+            "uniqueId": "0000-0000-0001",
+            "title": "Aurecon Master Space",
+            "transmittalCount": 8,
+
+            "userId": 1
+        },
+        {
+            "id": "2",
+            "uniqueId": "0000-0000-0002",
+            "title": "Aurecon Demo Space",
+            "transmittalCount": 1,
+
+            "userId": 1
+        },
+        {
+            "id": "3",
+            "uniqueId": "0000-0000-0003",
+            "title": "Aurecon Master Space Longer than usual",
+            "transmittalCount": 1000,
+
+            "userId": 1
+        },
+        {
+            "id": "4",
+            "uniqueId": "0000-0000-0004",
+            "title": "Aurecon Master Space",
+            "transmittalCount": 1000,
+            "userId": 2
         }
     ],
     "transmittals": [
         {
             "projectId": "1",
             "id": "1",
-            "transmittalNo": "0000-0000-0000",
+            "sender": "Kimber Morrison",
+            "contact": "Eurich De Castro",
+            "transmittalNo": "520123-TRN-000111",
+            "issue_date": "2021-10-14T11:09:42.6331575",
             "subject": "UI Review of Transmittal",
-            "message": "Message"
+            "message": "** The user agrees to use the drawings/data only for the purpose for which it was develop by Aurecon. A user of Aurecon drawings/data in electronic format accepts the associated risk of using it without taking reasonable measures to verify the accuracy thereof against the original un-editable version, available from Aurecon. Any discrepancy between the drawings/data and the contract shall be finally decided by the Engineer/Principal",
+            "qr_code_url": "",
+            "company_img_url": "",
+            "company_name": "Aurecon",
+            "project_name": "P0000-DTR-000",
+            "projectFiles": "http://speedtest.tele2.net/1MB.zip",
+            "documents": [
+                {
+                    "transmittalId": "1",
+                    "id": "1",
+                    "fileName": "P000-000-DTR-000",
+                    "title": "Doc Title",
+                    "rev": "rev 0",
+                    "state": "SHR",
+                    "status": "PC Approved For",
+                    "size": "20",
+                    "filepath": "http://speedtest.tele2.net/1MB.zip"
+                },
+                {
+                    "transmittalId": "1",
+                    "id": "2",
+                    "fileName": "P000-000-DTR-000",
+                    "title": "Doc Title",
+                    "rev": "rev 0",
+                    "state": "SHR",
+                    "status": "PC Approved For",
+                    "size": "20",
+                    "filepath": "http://speedtest.tele2.net/1MB.zip"
+                }
+            ]
         },
         {
             "projectId": "1",
             "id": "2",
-            "transmittalNo": "0000-0000-0000",
+            "transmittalNo": "520123-TRN-000222",
+            "issue_date": "2021-10-14T11:09:42.6331575",
+            "sender": "Kimber Morrison",
+            "contact": "Eurich De Castro",
             "subject": "UI Review of Transmittal",
-            "message": "Message"
-        }
-    ],
-    "documents": [
-        {
-            "transmittalId": "1",
-            "id": "1",
-            "fileName": "P000-000-DTR-000",
-            "title": "Doc Title",
-            "rev": "rev 0",
-            "state": "SHR",
-            "status": "PC Approved For",
-            "size": "20",
-            "filepath": "https://www.google.com/"
-        },
-        {
-            "transmittalId": "1",
-            "id": "2",
-            "fileName": "P000-000-DTR-000",
-            "title": "Doc Title",
-            "rev": "rev 0",
-            "state": "SHR",
-            "status": "PC Approved For",
-            "size": "20",
-            "filepath": "https://www.google.com/"
+            "message": "This is the start of the message",
+            "qr_code_url": "",
+            "company_img_url": "",
+            "company_name": "Aurecon",
+            "project_name": "P0000-DTR-000",
+            "projectFiles": "http://speedtest.tele2.net/1MB.zip",
+            "documents": [
+                {
+                    "transmittalId": "1",
+                    "id": "1",
+                    "fileName": "P000-000-DTR-000",
+                    "title": "Doc Title",
+                    "rev": "rev 0",
+                    "state": "SHR",
+                    "status": "PC Approved For",
+                    "size": "20",
+                    "filepath": "http://speedtest.tele2.net/1MB.zip"
+                },
+                {
+                    "transmittalId": "1",
+                    "id": "2",
+                    "fileName": "P000-000-DTR-000",
+                    "title": "Doc Title",
+                    "rev": "rev 0",
+                    "state": "SHR",
+                    "status": "PC Approved For",
+                    "size": "20",
+                    "filepath": "http://speedtest.tele2.net/1MB.zip"
+                }
+            ]
         }
     ]
 }

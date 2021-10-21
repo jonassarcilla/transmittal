@@ -1,0 +1,14 @@
+#pageHeader {
+    background-color: #fefefe;
+    color: #000000;
+    width: 100%;
+    border-top: 8px solid #313f51;
+    border-bottom: 3px solid #f7f7f7;
+}
+
+#pageHeader h2 {
+    margin:0;
+    padding: 10px 5px;
+    font-weight: normal;
+    color: #393939;
+}

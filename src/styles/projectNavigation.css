@@ -5,7 +5,8 @@
 }
 
 #projectNavigation .projectHead {
-    /* max-width: 250px; */
+    height: 36px;
+    overflow: hidden;
 }
 
 #projectNavigation .projectHead label {
@@ -28,10 +29,12 @@
 
 #projectNavigation .projectHead .btn svg {
     font-size: 20px;
+    overflow: hidden;
 }
 
 #projectNavigation .projectList .list-group.collapse {
     min-width: 250px;
+    cursor: pointer;
 }
 
 #projectNavigation .projectList .list-group.collapse .projectName {
@@ -41,14 +44,15 @@
     width: 180px;
 }
 
-#projectNavigation .projectList .list-group-item-primary.list-group-item-action {
+#projectNavigation .projectList .list-group-item-primary.list-group-item-primary {
     color: #313f51;
     background-color: transparent;
     border-color: transparent;
     border: none;
+    transition: 400ms;
 }
 
-#projectNavigation .projectList .list-group-item-primary.list-group-item-action.active {
+#projectNavigation .projectList .list-group-item-primary.list-group-item-primary.active {
     background-color: rgba(49,63,81, 0.2);
     border-left: 3px solid #313f51;
     font-weight: 600;

@@ -37,7 +37,11 @@
     font-weight: bolder;
 }
 
-#transmittalList .list-group-item-light.list-group-item-action.active {
+#transmittalList .list-group-item-light {
+    cursor: pointer;
+}
+
+#transmittalList .list-group-item-light.active {
     color: #fff;
     background-color: #313f51;
     border-color: #313f51;
