@@ -89,16 +89,16 @@ const TransmittalList = ({user}) => {
                     return <ListGroup variant="flush">
                         {transmittalNavigation.transmittalList.map((transmittalInfo, index) => {
                             return (
-                                <ListGroup.Item variant="light"
+                                <ListGroup.Item key={index} variant="light"
                                     onClick={(event) => selectTransmittal(event, transmittalInfo)}
                                     className={`py-3 ${index == 0 ? "active" : ""}`}
                                 >
-                                    <div class="d-flex justify-content-between preview-header">
+                                    <div className="d-flex justify-content-between preview-header">
                                         <div>
                                             <h5>{transmittalInfo.sender}</h5>
                                             <p>{transmittalInfo.transmittalNo}</p>
                                         </div>
-                                        <div class="preview-header-date">{transmittalInfo.issued_date}<br/>{transmittalInfo.issued_time}</div>
+                                        <div className="preview-header-date">{transmittalInfo.issued_date}<br/>{transmittalInfo.issued_time}</div>
                                     </div>
                                     <div className="preview-content">
                                         <h6>{transmittalInfo.subject}</h6>

@@ -1,0 +1,8 @@
+@media print {
+    .no-print {
+        visibility: hidden !important;
+    }
+    .no-print {
+        display: none !important;
+    }
+}

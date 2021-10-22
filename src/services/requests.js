@@ -22,7 +22,13 @@ export default {
         return apiClient.get(`/users/${userId}/projects`);
     },
     getTransmittalList(projectId){
-        return apiClient.get(`projects/${projectId}/transmittals`);
+        return apiClient.get(`/projects/${projectId}/transmittals`);
+    },
+    getTransmittalDetailsById(id){
+        return apiClient.get(`/transmittals/${id}`);
+    },
+    getTransmittalDetailsByMagicLink(id){
+        return apiClient.get(`/transmittals/${id}`);
     },
     getFileToDownload(url, fileName){
         return fetch(url, {

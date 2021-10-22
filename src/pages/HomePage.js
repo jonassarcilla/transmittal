@@ -20,7 +20,7 @@ const HomePage = () => {
 
     useEffect(() => {
         getUserData();
-    },{});
+    },[]);
 
     return (
         <UserContext.Provider value={[user, setUser]}>

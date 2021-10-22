@@ -10,14 +10,15 @@ import TransmittalDetails from '../components/TransmittalDetails';
 
 const AppLayout = () => {
     const [user] = useContext(UserContext);
+    const printPreview = false;
 
     return (
-        <div class="d-flex flex-column" style={{ overflow: 'hidden' }}>
-            <header class="sticky-top" style={{ overflow: 'hidden' }}>
+        <div className="d-flex flex-column" style={{ overflow: 'hidden' }}>
+            <header className="sticky-top" style={{ overflow: 'hidden' }}>
                 <PageHeader user={user}/>
             </header>
-            <main class="d-flex flex-column" style={{ height: '100vh', overflow: 'hidden'}}>
-                <div class="d-flex align-items-stretch" style={{ height: '100vh', overflow: 'hidden' }}>
+            <main className="d-flex flex-column" style={{ height: '100vh', overflow: 'hidden'}}>
+                <div className="d-flex align-items-stretch" style={{ height: '100vh', overflow: 'hidden' }}>
                     <aside style={{ borderRight: '1px solid gainsboro'}}>
                         <ProjectNavigation user={user}/>
                     </aside>
@@ -26,8 +27,8 @@ const AppLayout = () => {
                         <TransmittalList user={user}/>
                     </section>
 
-                    <article flex-grow-1>
-                        <TransmittalDetails user={user}/>
+                    <article flex-grow-1="true">
+                        <TransmittalDetails user={user} printPreview="false"/>
                     </article>
                 </div>
             </main>

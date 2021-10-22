@@ -47,9 +47,9 @@ const ProjectNavigation = ({ user }) => {
     }
 
     return (
-        <div id="projectNavigation" class="d-flex flex-column">
+        <div id="projectNavigation" className="d-flex flex-column">
             <div className="projectHead">
-                <div class="d-flex justify-content-between">
+                <div className="d-flex justify-content-between">
                     <Collapse in={open} dimension="width">
                         <Label>Projects</Label>
                     </Collapse>
@@ -87,11 +87,11 @@ const ProjectNavigation = ({ user }) => {
                                         return <ListGroup variant="flush">
                                             {   
                                                 projectNavigation.projectList.map(({ id, title, transmittalCount }, index) => (
-                                                    <ListGroup.Item variant="primary"
+                                                    <ListGroup.Item key={id} variant="primary"
                                                         onClick={(event) => selectProject(event, id)}
                                                         className={`${index == 0 ? "active" : ""}`}
                                                     >
-                                                        <div class="d-flex justify-content-between">
+                                                        <div className="d-flex justify-content-between">
                                                             <div className="projectName">{title}</div>
                                                             <Badge bg="dark">{transmittalCount}</Badge>
                                                         </div>

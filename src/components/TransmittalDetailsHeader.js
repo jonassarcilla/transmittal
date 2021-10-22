@@ -1,4 +1,5 @@
 import React, { memo, useState, useContext, useEffect } from 'react'
+import { Link } from "react-router-dom";
 import { UserContext } from '../contexts/UserContext';
 
 import { Label, IconButton, Image, ImageFit } from '@fluentui/react';
@@ -39,9 +40,9 @@ const companyLogoProps = {
 
 const TransmittalDetailsHeader = ({transmittalDetails}) => {
     return (
-        <header class="d-flex justify-content-between align-items-center">
-            <div class="d-flex flex-row">
-                <div class="d-flex flex-row align-items-center">
+        <header className="d-flex justify-content-between align-items-center">
+            <div className="d-flex flex-row">
+                <div className="d-flex flex-row align-items-center">
                     {(() => {
                         if(transmittalDetails.isLoading == true || Object.keys(transmittalDetails.details).length == 0){
                             return <Placeholder>
@@ -51,17 +52,15 @@ const TransmittalDetailsHeader = ({transmittalDetails}) => {
                         else {
                             const qr_code_url = transmittalDetails.details.qr_code_url || qrcode_logo
 
-                            return <Print>
-                                <Image
+                            return <Image
                                 {...qrcode_logo}
                                 src={qr_code_url}
                                 alt='QR Code'
-                                />
-                            </Print>
+                            />
                         }
                     })()}
                 </div>
-                <div class="d-flex flex-row align-items-center">
+                <div className="d-flex flex-row align-items-center">
                     {(() => {
                         if(transmittalDetails.isLoading == true){
                             return <Placeholder style={{ marginLeft: 10 }}>
@@ -97,7 +96,11 @@ const TransmittalDetailsHeader = ({transmittalDetails}) => {
             <div>
                 {(() => {
                     if(transmittalDetails.isLoading == false){
-                        return <IconButton className="printDocument" iconProps={emojiIcon} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false} />
+                        return <NoPrint>
+                            <Link to={`/transmittal?tid=` + transmittalDetails.details.id } target="_blank" rel="noopener noreferrer">
+                                <IconButton className="printDocument" iconProps={emojiIcon} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false} />
+                            </Link>
+                        </NoPrint>
                     }
                 })()}
             </div>
