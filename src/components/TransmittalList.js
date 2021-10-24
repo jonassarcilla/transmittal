@@ -1,44 +1,14 @@
-import React, { memo, useState, useContext, useEffect }  from 'react'
+import React, { memo, useState, useContext, useRef }  from 'react'
 import { UserContext } from '../contexts/UserContext';
 import requests from "../services/requests";
 
 import { ListGroup, Placeholder, Stack } from 'react-bootstrap';
 import '../styles/transmittalList.css';
 
-const transmittalList = [
-    {
-        "id": 1,
-        "sender": "Kimberley Morrison",
-        "transmittalNo": "520123-TRN-000111",
-        "issued_date": "Tues",
-        "issued_time": "17:15",
-        "subject": "UI Review of Transmittal",
-        "message": "This is the start of the message"
-    },
-    {   
-        "id": 2,
-        "sender": "Kimberley Morrison",
-        "transmittalNo": "520123-TRN-000111",
-        "issued_date": "23/09/21",
-        "issued_time": "17:15",
-        "subject": "UI Review of Transmittal",
-        "message": "This is the start of the message"
-    },
-    {   
-        "id": 3,
-        "sender": "Kimberley Morrison Longer Name",
-        "transmittalNo": "520123-TRN-000111-longer-number",
-        "issued_date": "23/09/21",
-        "issued_time": "17:15",
-        "subject": "UI Review of Transmittal Longer Subject Name",
-        "message": "This is the start of the message Much more longer messae"
-    }
-];
-
-
 const TransmittalList = ({user}) => {
     const [userInfoContext, setUserInfoContext] = useContext(UserContext);
     const [transmittalNavigation, setTransmittalNavigation] = useState({ isLoading: true, transmittalList: [] });
+    const ref = useRef();
 
     const getTransmittalsData = (projectId) => {
         requests.getTransmittalList(projectId).then((response) => {
@@ -56,9 +26,16 @@ const TransmittalList = ({user}) => {
     if(user.isLoading === false 
         && user.userInfo !== null 
         && user.selectedProject
-        && transmittalNavigation.isLoading == true)
+        && transmittalNavigation.isLoading == true 
+        || (ref.current && ref.current != user.selectedProject))
     {
         getTransmittalsData(user.selectedProject);
+
+        if(ref.current && ref.current != user.selectedProject){
+            setTransmittalNavigation({ ...transmittalNavigation, transmittalList: [] });
+        }
+
+        ref.current = user.selectedProject;
     }
 
     const selectTransmittal = (event, transmittalInfo) => {

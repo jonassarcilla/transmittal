@@ -1,4 +1,4 @@
-import React, { memo, useState, useContext, useEffect } from 'react'
+import React, { memo, useState, useContext, useEffect, useRef } from 'react'
 import { UserContext } from '../contexts/UserContext';
 import requests from '../services/requests';
 
@@ -114,11 +114,22 @@ const downloadTransmittalFile = (filePath, fileName) => {
     });
 }
 
+const downloadAllTransmittalFiles = (documents) => {
+  documents.map((document, index) => {
+    requests.getFileToDownload(document.filePath, document.fileName).then(
+      response => {
+        console.log(response);
+    });
+  });
+}
+
+
 const TransmittalDetails = ({ user, printPreview }) => {
     initializeIcons();
 
     const [userInfoContext] = useContext(UserContext);
     const [transmittalDetails, setTransmittalDetails] = useState({ isLoading: true, details: {} });
+    const ref = useRef();
 
     const NoDataIndication = () => (
       <Placeholder as="p" animation="wave" className="my-1">
@@ -148,13 +159,20 @@ const TransmittalDetails = ({ user, printPreview }) => {
         if(user.isLoading === false 
           && user.userInfo !== null 
           && user.selectedTransmittal
-          && transmittalDetails.isLoading == true && printPreview == "false")
+          && transmittalDetails.isLoading == true && printPreview == "false"
+          || (ref.current && ref.current != user.selectedTransmittal))
         {
           const transmittalInfo = user.selectedTransmittal;
           transmittalInfo.qr_code_url = transmittalInfo.qr_code_url || qrcode_logo;
           transmittalInfo.company_img_url = transmittalInfo.company_img_url || company_logo;
+
+          if(ref.current && ref.current != user.selectedTransmittal){
+            setTransmittalDetails({ ...transmittalDetails, details: transmittalInfo });
+          }
     
-          setTransmittalDetails({ isLoading: false, details: transmittalInfo })
+          setTransmittalDetails({ isLoading: false, details: transmittalInfo });
+
+          ref.current = user.selectedTransmittal;
         }
       }
 
@@ -178,7 +196,7 @@ const TransmittalDetails = ({ user, printPreview }) => {
                     iconProps={{iconName: 'DownloadDocument'}} 
                     title="Print Transmittal" 
                     ariaLabel="Print Transmittal"
-                    onClick={() => downloadTransmittalFile()}>
+                    onClick={() => downloadAllTransmittalFiles(transmittalDetails.details.documents || [])}>
                     Download All
                   </ActionButton>
                 </NoPrint>
