@@ -38,7 +38,7 @@ const companyLogoProps = {
 
 
 
-const TransmittalDetailsHeader = ({transmittalDetails}) => {
+const TransmittalDetailsHeader = ({transmittalDetails, printPreview}) => {
     return (
         <header className="d-flex justify-content-between align-items-center">
             <div className="d-flex flex-row">
@@ -96,11 +96,21 @@ const TransmittalDetailsHeader = ({transmittalDetails}) => {
             <div>
                 {(() => {
                     if(transmittalDetails.isLoading == false){
-                        return <NoPrint>
-                            <Link to={`/transmittal?tid=` + transmittalDetails.details.id } target="_blank" rel="noopener noreferrer">
-                                <IconButton className="printDocument" iconProps={emojiIcon} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false} />
-                            </Link>
-                        </NoPrint>
+                        if(printPreview == false){
+                            return <NoPrint>
+                                <Link to={`/transmittal?tid=` + transmittalDetails.details.id } target="_blank" rel="noopener noreferrer">
+                                    <IconButton className="printDocument" iconProps={emojiIcon} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false} />
+                                </Link>
+                            </NoPrint>
+                        } else {
+                            return <IconButton className="printDocument" 
+                                    iconProps={emojiIcon} 
+                                    title="Print Transmittal" 
+                                    ariaLabel="Print Transmittal" disabled={false} checked={false} 
+                                    onClick={() => window.print()}
+                                />
+                        }
+                        
                     }
                 })()}
             </div>

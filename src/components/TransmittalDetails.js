@@ -23,7 +23,6 @@ const emojiIcon = {
   iconName: 'Print'
 };
 
-
 const columns = [
   {
     dataField: 'fileName',
@@ -184,7 +183,7 @@ const TransmittalDetails = ({ user, printPreview }) => {
     return (
       <PrintProvider>
         <div className="d-flex flex-column p-3" style={printPreviewStyle}>
-            <TransmittalDetailsHeader transmittalDetails={transmittalDetails}/>
+            <TransmittalDetailsHeader transmittalDetails={transmittalDetails} printPreview={printPreview}/>
             
             <TransmittalDetailsContent transmittalDetails={transmittalDetails}/>
 
