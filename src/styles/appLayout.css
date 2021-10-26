@@ -1,0 +1,7 @@
+#appLayout .fullHeight {
+    height: 100vh;
+}
+
+#appLayout .appContainer {
+    border-right: 1px solid gainsboro;
+}

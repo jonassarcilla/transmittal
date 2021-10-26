@@ -32,12 +32,12 @@
     overflow: hidden;
 }
 
-#projectNavigation .projectList .list-group.collapse {
+#projectNavigation .projectList .list-group {
     min-width: 250px;
     cursor: pointer;
 }
 
-#projectNavigation .projectList .list-group.collapse .projectName {
+#projectNavigation .projectList .list-group .projectName {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

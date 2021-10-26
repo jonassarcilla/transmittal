@@ -6,3 +6,12 @@
         display: none !important;
     }
 }
+
+.print-preview {
+    overflow-y: auto;
+    background-color: #ffffff !important;
+}
+
+.print-preview.vh-91 {
+    height:91vh !important;
+}

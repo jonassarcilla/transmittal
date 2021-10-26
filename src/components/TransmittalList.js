@@ -1,21 +1,33 @@
-import React, { memo, useState, useContext, useRef }  from 'react'
-import { UserContext } from '../contexts/UserContext';
-import requests from "../services/requests";
+import React, { Component } from 'react'
 
-import { ListGroup, Placeholder, Stack } from 'react-bootstrap';
+import { AppContext } from '../contexts/AppContext';
+import { getTransmittalList } from '../services/api'
+
+import { ListGroup } from 'react-bootstrap';
 import '../styles/transmittalList.css';
 
-const TransmittalList = ({user}) => {
-    const [userInfoContext, setUserInfoContext] = useContext(UserContext);
-    const [transmittalNavigation, setTransmittalNavigation] = useState({ isLoading: true, transmittalList: [] });
-    const ref = useRef();
+export default class TransmittalList extends Component {
+    static contextType = AppContext;
 
-    const getTransmittalsData = (projectId) => {
-        requests.getTransmittalList(projectId).then((response) => {
-            setTransmittalNavigation({ isLoading: false, transmittalList: response.data });
+    constructor(props) {
+		super(props);
 
-            if(response.data.length > 0){
-                setUserInfoContext({...userInfoContext, selectedTransmittal: response.data[0]});
+		this.state = {
+            isLoading: true,
+            transmittalList: [],
+            currentProjectId: null
+		};
+	}
+
+    getTransmittalsData(projectId) {
+        const appContext = this.context;
+
+        getTransmittalList(projectId).then((response) => {
+            const transmittalList = response.data
+            this.setState({ isLoading: false, transmittalList: transmittalList, currentProjectId: projectId });
+
+            if(transmittalList.length > 0){
+                appContext.setState({selectedTransmittal: transmittalList[0]});
             }
         })
         .catch((error) => {
@@ -23,22 +35,9 @@ const TransmittalList = ({user}) => {
         });
     }
 
-    if(user.isLoading === false 
-        && user.userInfo !== null 
-        && user.selectedProject
-        && transmittalNavigation.isLoading == true 
-        || (ref.current && ref.current != user.selectedProject))
-    {
-        getTransmittalsData(user.selectedProject);
+    selectTransmittal(event, transmittalInfo){
+        const appContext = this.context;
 
-        if(ref.current && ref.current != user.selectedProject){
-            setTransmittalNavigation({ ...transmittalNavigation, transmittalList: [] });
-        }
-
-        ref.current = user.selectedProject;
-    }
-
-    const selectTransmittal = (event, transmittalInfo) => {
         const activeTransmittal = document.getElementsByClassName("list-group-item-light active");
 
         for (var i = 0; i < activeTransmittal.length; i++) {
@@ -46,49 +45,63 @@ const TransmittalList = ({user}) => {
         }
 
         event.target.closest(".list-group-item-light").className += " active";
-        setUserInfoContext({...userInfoContext, selectedTransmittal: transmittalInfo});
+        
+        appContext.setState({selectedTransmittal: transmittalInfo});
     }
 
-    return (
-        <div id="transmittalList">
-            {(() => {
-                if (transmittalNavigation.isLoading == true) {
-                    return <Placeholder as="p" animation="wave" className="mt-2">
-                                <Stack direction="horizontal" gap={1}>
-                                    <Placeholder xs={8} size="lg" bg="secondary" className="mx-3"/>
-                                    <Placeholder xs={1} size="lg" bg="secondary" className="mx-3" />
-                                </Stack>
-                                <Placeholder xs={10} size="sm" bg="success" className="mx-3"/>
-                                <Placeholder xs={10} size="sm" bg="secondary" className="mx-3"/>
-                                <Placeholder xs={10} size="sm" bg="secondary" className="mx-3"/>
-                            </Placeholder>
-                } else {
-                    return <ListGroup variant="flush">
-                        {transmittalNavigation.transmittalList.map((transmittalInfo, index) => {
-                            return (
-                                <ListGroup.Item key={index} variant="light"
-                                    onClick={(event) => selectTransmittal(event, transmittalInfo)}
-                                    className={`py-3 ${index == 0 ? "active" : ""}`}
-                                >
-                                    <div className="d-flex justify-content-between preview-header">
-                                        <div>
-                                            <h5>{transmittalInfo.sender}</h5>
-                                            <p>{transmittalInfo.transmittalNo}</p>
-                                        </div>
-                                        <div className="preview-header-date">{transmittalInfo.issued_date}<br/>{transmittalInfo.issued_time}</div>
-                                    </div>
-                                    <div className="preview-content">
-                                        <h6>{transmittalInfo.subject}</h6>
-                                        <p>{transmittalInfo.message}</p>
-                                    </div>
-                                </ListGroup.Item>
-                            )
-                        })}
-                    </ListGroup>
-                }
-            })()}
-        </div>
-    )
-}
+    componentDidUpdate(){
+        const appContextState = this.context.state;
 
-export default memo(TransmittalList)
+        if(appContextState.isLoading === false 
+            && appContextState.userInfo 
+            && appContextState.selectedProject
+            && this.state.isLoading === true
+            || (this.state.currentProjectId && appContextState.selectedProject !== this.state.currentProjectId)
+            ){
+            this.getTransmittalsData(appContextState.selectedProject);
+        }
+    }
+
+    render() {
+        const appContextState = this.context.state;
+
+        return (
+            <div id="transmittalList">
+                {(() => {
+                    if (this.state.isLoading === true || (this.state.currentProjectId && appContextState.selectedProject !== this.state.currentProjectId)) {
+                        return <p aria-hidden="true" className="placeholder-glow p-2">
+                            <span className="placeholder placeholder-lg col-9 bg-secondary mx-2"></span>
+                            <span className="placeholder placeholder-lg col-1 bg-dark mx-2"></span>
+                            <span className="placeholder placeholder-lg col-11 bg-success mx-2"></span>
+                            <span className="placeholder placeholder-lg col-11 bg-secondary mx-2"></span>
+                            <span className="placeholder placeholder-lg col-11 bg-secondary mx-2"></span>
+                        </p>
+                    } else {
+                        return <ListGroup variant="flush">
+                            {this.state.transmittalList.map((transmittalInfo, index) => {
+                                return (
+                                    <ListGroup.Item key={index} variant="light"
+                                        onClick={(event) => this.selectTransmittal(event, transmittalInfo)}
+                                        className={`py-3 ${index === 0 ? "active" : ""}`}
+                                    >
+                                        <div className="d-flex justify-content-between preview-header">
+                                            <div>
+                                                <h5>{transmittalInfo.sender}</h5>
+                                                <p>{transmittalInfo.transmittalNo}</p>
+                                            </div>
+                                            <div className="preview-header-date">{transmittalInfo.issued_date}<br/>{transmittalInfo.issued_time}</div>
+                                        </div>
+                                        <div className="preview-content">
+                                            <h6>{transmittalInfo.subject}</h6>
+                                            <p>{transmittalInfo.message}</p>
+                                        </div>
+                                    </ListGroup.Item>
+                                )
+                            })}
+                        </ListGroup>
+                    }
+                })()}
+            </div>
+        )
+    }
+}

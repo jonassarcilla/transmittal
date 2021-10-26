@@ -1,7 +1,7 @@
 import React, { memo, useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
 import { useLocation } from "react-router-dom";
-import requests from '../services/requests';
+import requests from '../services/api';
 
 import TransmittalDetails from '../components/TransmittalDetails';
 

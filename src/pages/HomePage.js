@@ -1,32 +1,52 @@
-import { memo, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { UserContext } from '../contexts/UserContext';
-import requests from "../services/requests";
+import React, { Component } from 'react'
+import queryString from 'query-string';
+import { AppContext } from '../contexts/AppContext';
+import { getUserByTransmittalId, getUserByLink } from '../services/api'
+
 
 import AppLayout from '../layouts/AppLayout';
 
+export default class HomePage extends Component {
+    constructor(props) {
+		super(props);
 
-const HomePage = () => {
-    const { userid } = useParams();
-    const [user, setUser] = useState({isLoading:true, userInfo: null });
+		this.state = {
+			isLoading: true, 
+            userInfo: null,
+            selectedProject: null,
+            selectedTransmittal: null,
+            isPrintPreviewOnly: false
+		};
+	}
 
-    const getUserData = () => {
-        requests.getUser(userid).then((response) => {
-            setUser({isLoading:false, userInfo: response.data[0] })
-        }).catch((error) => {
-            console.log(error);
-        })
+    componentWillMount() {
+        const params = queryString.parse(this.props.location.search),
+            tid = params.tid || null,
+            magicLink = params.magicLink || null;
+            
+        if(tid){
+            getUserByTransmittalId(tid).then((response) => {
+                const userInfo = response.data[0];
+                this.setState({ ...this.state, isLoading: false, userInfo: userInfo});
+            })
+        } else if(magicLink){
+            getUserByLink(magicLink).then((response) => {
+                const userInfo = response.data[0];
+                this.setState({ ...this.state, isLoading: false, userInfo: userInfo, isPrintPreviewOnly: true});
+            })
+        } else {
+            // Go to Not Found
+        }
     }
 
-    useEffect(() => {
-        getUserData();
-    },[]);
-
-    return (
-        <UserContext.Provider value={[user, setUser]}>
-            <AppLayout/>
-        </UserContext.Provider>
-    )
+    render() {
+        
+        return (
+            <AppContext.Provider value={this.state, this}> 
+                {/*  value={[user, setUser]} */}
+                <AppLayout/>
+                {/* <TransmittalDetails user={transmittalDetails } printPreview="true"/> */}
+            </AppContext.Provider>
+        )
+    }
 }
-
-export default memo(HomePage);
