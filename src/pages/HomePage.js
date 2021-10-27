@@ -43,7 +43,6 @@ export default class HomePage extends Component {
         
         return (
             <AppContext.Provider value={this.state, this}> 
-                {/*  value={[user, setUser]} */}
                 <AppLayout/>
                 {/* <TransmittalDetails user={transmittalDetails } printPreview="true"/> */}
             </AppContext.Provider>

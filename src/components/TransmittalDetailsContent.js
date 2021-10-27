@@ -6,27 +6,50 @@ import { Placeholder } from 'react-bootstrap';
 export default class TransmittalDetailsContent extends Component {
     static contextType = AppContext;
 
-    constructor(props) {
-		super(props);
-
-		this.state = {
-            isLoading: true,
-            details: null,
-            currentProjectId: null,
-            currentTransmittalId: null
-		};
-	}
-
-    componentDidUpdate(){
+    renderDetails(){
         const appContextState = this.context.state;
-        
-        if(appContextState.isLoading === false 
-            && appContextState.userInfo 
-            && appContextState.selectedTransmittal
-            && this.state.isLoading === true
-        || (this.state.details && appContextState.selectedTransmittal !== this.state.details)
-        ){
-            this.setState({isLoading: false,currentProjectId: appContextState.selectedProject, details: appContextState.selectedTransmittal})
+
+        if(this.props.isLoading){
+            const placeHolderContent = Array.apply(null, {length: 5}).map((value, index) => {
+                return <p key={index} style={{ marginBottom: '0.5em'}}>
+                    <Placeholder as="p" animation="wave" className="my-1">
+                        <Placeholder xs={6} size="lg" bg="secondary" style={{ width: '95%', height: 20 }}/>
+                    </Placeholder>
+                </p>
+            });
+
+            return <div className="container-fluid">
+                <div className="row" style={{ minWidth: 250, fontSize: 14, border: '2px solid #313f52' }}>
+                    <div className="col-12 col-md-12 col-lg-6">
+                        {/* {placeHolderContent} */}
+                    </div>
+                    <div className="col-12 col-md-12 col-lg-6">
+                        {/* {placeHolderContent} */}
+                    </div>
+                </div>
+            </div>
+        } else {
+            if(appContextState.selectedTransmittal === null){
+                return false;
+            }
+
+            const transmitalInfo = appContextState.selectedTransmittal;
+
+            return <div className="container-fluid">
+                <div className="row" style={{ minWidth: 250, fontSize: 14, border: '2px solid #313f52' }}>
+                <div className="col-12 col-md-12 col-lg-6">
+                    <p style={{ marginBottom: '0.5em'}}><b>Transmittal:</b> <span>{transmitalInfo.transmittalNo}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Sent By:</b> <span>{transmitalInfo.sender}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Project:</b> <span>{transmitalInfo.project_name}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Issued On:</b> <span>{transmitalInfo.issue_date}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Key Contact:</b> <span>{transmitalInfo.contact}</span></p>
+                </div>
+                <div className="col-12 col-md-12 col-lg-6">
+                    <p style={{ marginBottom: '0.5em'}}><b>Subject:</b> <span>{transmitalInfo.subject}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Message:</b> <span>{transmitalInfo.message}</span></p>
+                </div>
+                </div>
+            </div>
         }
     }
 
@@ -38,48 +61,7 @@ export default class TransmittalDetailsContent extends Component {
                 <div className="d-flex justify-content-between align-items-center">
                     <Label style={{fontSize: 16 }}>Details</Label>
                 </div>
-                {(() => {
-                    console.log(this.state.isLoading);
-                    console.log(this.state.details);
-                    if(this.state.isLoading == true || appContextState.selectedTransmittal == null){
-                        const placeHolderContent = Array.apply(null, {length: 5}).map((value, index) => {
-                            return <p key={index} style={{ marginBottom: '0.5em'}}>
-                                <Placeholder as="p" animation="wave" className="my-1">
-                                    <Placeholder xs={6} size="lg" bg="secondary" style={{ width: '95%', height: 20 }}/>
-                                </Placeholder>
-                            </p>
-                        });
-    
-                        return <div className="container-fluid">
-                            <div className="row" style={{ minWidth: 250, fontSize: 14, border: '2px solid #313f52' }}>
-                            <div className="col-12 col-md-12 col-lg-6">
-                                {placeHolderContent}
-                            </div>
-                            <div className="col-12 col-md-12 col-lg-6">
-                            {placeHolderContent}
-                            </div>
-                            </div>
-                        </div>
-                    } else {
-                        const transmitalInfo = appContextState.selectedTransmittal;
-    
-                        return <div className="container-fluid">
-                            <div className="row" style={{ minWidth: 250, fontSize: 14, border: '2px solid #313f52' }}>
-                            <div className="col-12 col-md-12 col-lg-6">
-                                <p style={{ marginBottom: '0.5em'}}><b>Transmittal:</b> <span>{transmitalInfo.transmittalNo}</span></p>
-                                <p style={{ marginBottom: '0.5em'}}><b>Sent By:</b> <span>{transmitalInfo.sender}</span></p>
-                                <p style={{ marginBottom: '0.5em'}}><b>Project:</b> <span>{transmitalInfo.project_name}</span></p>
-                                <p style={{ marginBottom: '0.5em'}}><b>Issued On:</b> <span>{transmitalInfo.issue_date}</span></p>
-                                <p style={{ marginBottom: '0.5em'}}><b>Key Contact:</b> <span>{transmitalInfo.contact}</span></p>
-                            </div>
-                            <div className="col-12 col-md-12 col-lg-6">
-                                <p style={{ marginBottom: '0.5em'}}><b>Subject:</b> <span>{transmitalInfo.subject}</span></p>
-                                <p style={{ marginBottom: '0.5em'}}><b>Message:</b> <span>{transmitalInfo.message}</span></p>
-                            </div>
-                            </div>
-                        </div>
-                    }
-                })()}
+                {this.renderDetails()}
             </section>
         )
     }

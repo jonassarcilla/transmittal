@@ -4,19 +4,18 @@ import { AppContext } from '../contexts/AppContext';
 import '../styles/appLayout.css'
 import PageHeader from '../components/PageHeader';
 import ProjectNavigation from '../components/ProjectNavigation';
-import TransmittalList from '../components/TransmittalList';
-import TransmittalDetails from '../components/TransmittalDetails';
 
 export default class AppLayout extends Component {
     static contextType = AppContext;
 
-    // constructor(props) {
-    //     super(props);
-    //     // //Let's declare an empty profile state here.
-    //     // state = {
-    //     //     profile: {},
-    //     // };
-    // }
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            isLoading: true,
+            userInfo: null
+		};
+    }
     
     render() {
         return (
@@ -26,17 +25,7 @@ export default class AppLayout extends Component {
                 </header>
                 <main className="d-flex flex-column overflow-hidden fullHeight">
                     <div className="d-flex align-items-stretch overflow-hidden fullHeight">
-                        <aside className="appContainer">
-                            <ProjectNavigation/>
-                        </aside>
-
-                        <section className="appContainer">
-                            <TransmittalList/>
-                        </section>
-
-                        <article flex-grow-1="true">
-                            <TransmittalDetails/>
-                        </article>
+                        <ProjectNavigation/>
                     </div>
                 </main>
             </div>

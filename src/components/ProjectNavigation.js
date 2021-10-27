@@ -8,6 +8,8 @@ import { Button, Row, Col, ListGroup, Tab, Badge } from 'react-bootstrap';
 import { FiChevronsLeft, FiChevronsRight } from "react-icons/fi";
 import '../styles/projectNavigation.css';
 
+import TransmittalList from '../components/TransmittalList';
+
 export default class ProjectNavigation extends Component {
     static contextType = AppContext;
 
@@ -17,7 +19,8 @@ export default class ProjectNavigation extends Component {
 		this.state = {
 			open: true,
             isLoading: true,
-            projectList: []
+            projectList: [],
+            selectedProjectId: null
 		};
 	}
 
@@ -30,6 +33,7 @@ export default class ProjectNavigation extends Component {
 
             if(projectList.length > 0){
                 appContext.setState({selectedProject: projectList[0].id});
+                this.setState({selectedProjectId: projectList[0].id});
             }
         })
         .catch((error) => {
@@ -49,6 +53,8 @@ export default class ProjectNavigation extends Component {
         event.target.closest(".list-group-item-primary").className += " active";
 
         appContext.setState({selectedProject: id, selectedTransmittal: null});
+        
+        this.setState({selectedProjectId: id});
     }
 
     componentDidUpdate(){
@@ -61,72 +67,78 @@ export default class ProjectNavigation extends Component {
 
     render() {
         return (
-            <div id="projectNavigation" className="d-flex flex-column">
-                <div className="projectHead">
-                    <div className="d-flex justify-content-between">
-                        {(() => {
-                            if (this.state.open === true) {
-                                return <Label>Projects</Label>
-                            }
-                        })()}
-                        <Button
-                            variant="outline-dark"
-                            onClick={() => {
-                                this.setState({ ...this.state, open: !this.state.open });
-                            }}
-                            data-toggle="collapse" 
-                            data-target="#collapse" 
-                            aria-expanded={this.state.open}
-                            aria-controls="collapse"
-                        >
-                            {(() => {
-                                if (this.state.open === true) {
-                                    return <FiChevronsLeft/>
-                                } else {
-                                    return <FiChevronsRight/>
-                                }
-                            })()}
-                        </Button>
-                        
-                    </div>
-                </div>
-                <div className="projectList">
-                    <Tab.Container>
-                        <Row>
-                            <Col>
-                                <div id="#collapse" className={`${ !this.state.open ? 'collapse' : ''}`} style={{ minWidth: 250 }}>
+            <>
+                <aside className="appContainer">
+                    <div id="projectNavigation" className="d-flex flex-column">
+                        <div className="projectHead">
+                            <div className="d-flex justify-content-between">
+                                {(() => {
+                                    if (this.state.open === true) {
+                                        return <Label>Projects</Label>
+                                    }
+                                })()}
+                                <Button
+                                    variant="outline-dark"
+                                    onClick={() => {
+                                        this.setState({ ...this.state, open: !this.state.open });
+                                    }}
+                                    data-toggle="collapse" 
+                                    data-target="#collapse" 
+                                    aria-expanded={this.state.open}
+                                    aria-controls="collapse"
+                                >
                                     {(() => {
-                                        if (this.state.isLoading === true) {
-                                            return <p aria-hidden="true" className="placeholder-glow px-2">
-                                                <span className="placeholder placeholder-lg col-9 bg-secondary mx-2"></span>
-                                                <span className="placeholder placeholder-lg col-1 bg-dark mx-2"></span>
-                                                <span className="placeholder"></span>
-                                            </p>
-                                        }
-                                        else {
-                                            return <ListGroup variant="flush">
-                                                {   
-                                                    this.state.projectList.map(({ id, title, transmittalCount }, index) => (
-                                                        <ListGroup.Item key={id} variant="primary"
-                                                            onClick={(event) => this.selectProject(event, id)}
-                                                            className={`${index === 0 ? "active" : ""}`}
-                                                        >
-                                                            <div className="d-flex justify-content-between">
-                                                                <div className="projectName">{title}</div>
-                                                                <Badge bg="dark">{transmittalCount}</Badge>
-                                                            </div>
-                                                        </ListGroup.Item>
-                                                    ))
-                                                }
-                                            </ListGroup>
+                                        if (this.state.open === true) {
+                                            return <FiChevronsLeft/>
+                                        } else {
+                                            return <FiChevronsRight/>
                                         }
                                     })()}
-                                </div>
-                            </Col>
-                        </Row>
-                    </Tab.Container>
-                </div>
-            </div>
+                                </Button>
+                                
+                            </div>
+                        </div>
+                        <div className="projectList">
+                            <Tab.Container>
+                                <Row>
+                                    <Col>
+                                        <div id="#collapse" className={`${ !this.state.open ? 'collapse' : ''}`} style={{ minWidth: 250 }}>
+                                            {(() => {
+                                                if (this.state.isLoading === true) {
+                                                    return <p aria-hidden="true" className="placeholder-glow px-2">
+                                                        <span className="placeholder placeholder-lg col-9 bg-secondary mx-2"></span>
+                                                        <span className="placeholder placeholder-lg col-1 bg-dark mx-2"></span>
+                                                        <span className="placeholder"></span>
+                                                    </p>
+                                                }
+                                                else {
+                                                    return <ListGroup variant="flush">
+                                                        {   
+                                                            this.state.projectList.map(({ id, title, transmittalCount }, index) => (
+                                                                <ListGroup.Item key={id} variant="primary"
+                                                                    onClick={(event) => this.selectProject(event, id)}
+                                                                    className={`${index === 0 ? "active" : ""}`}
+                                                                >
+                                                                    <div className="d-flex justify-content-between">
+                                                                        <div className="projectName">{title}</div>
+                                                                        <Badge bg="dark">{transmittalCount}</Badge>
+                                                                    </div>
+                                                                </ListGroup.Item>
+                                                            ))
+                                                        }
+                                                    </ListGroup>
+                                                }
+                                            })()}
+                                        </div>
+                                    </Col>
+                                </Row>
+                            </Tab.Container>
+                        </div>
+                    </div>
+                </aside>
+
+                <TransmittalList selectedProjectId={this.state.selectedProjectId}/>
+            </>
         )
     }
 }
