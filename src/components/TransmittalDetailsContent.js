@@ -13,8 +13,8 @@ export default class TransmittalDetailsContent extends Component {
 
         if(this.props.isLoading){
             const placeHolderContent = Array.apply(null, {length: 5}).map((value, index) => {
-                return <p class="placeholder-glow">
-                    <span class="placeholder col-12 placeholder-lg"></span>
+                return <p key={index} className="placeholder-glow">
+                    <span className="placeholder col-12 placeholder-lg"></span>
                 </p>
             });
 

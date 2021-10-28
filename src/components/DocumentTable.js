@@ -108,7 +108,11 @@ export default class DocumentTable extends Component {
           
                 return <NoPrint>
                   <div style={{textAlign: 'center'}}>
-                      <Button variant="link" size="sm" className="px-0">
+                      <Button variant="link" size="sm" className="px-0"
+                        onClick={() => {
+                            window.open(filePath, "_blank");
+                        }}
+                      >
                         <FaRegFile style={{ fontSize: 20 }} />
                       </Button>
                       <Button variant="link" size="sm" className="px-0" 
