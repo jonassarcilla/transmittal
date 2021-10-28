@@ -24,13 +24,22 @@ export default class TransmittalPage extends Component {
             getTransmittalDetailsById(tid).then((response) => {
                 const selectedTransmittal = response.data;
                 this.setState({isLoading: false, selectedTransmittal: selectedTransmittal});
-            })
+            }).catch(response => {
+                this.setState({isLoading: false });
+            });
         }
         else if(magicLink){
             getTransmittalDetailsByLink(magicLink).then((response) => {
                 const selectedTransmittal = response.data[0];
-                this.setState({isLoading: false, selectedTransmittal: selectedTransmittal});
-            })
+
+                if(selectedTransmittal){
+                    this.setState({isLoading: false, selectedTransmittal: selectedTransmittal});
+                } else {
+                    this.setState({isLoading: false });
+                }
+            }).catch(response => {
+                this.setState({isLoading: false });
+            });
         } else {
             // Go to Not Found
         }
@@ -39,7 +48,7 @@ export default class TransmittalPage extends Component {
     render() {
         return (
             <AppContext.Provider value={this.state, this}>
-                <TransmittalDetails selectedTransmittal={this.state.selectedTransmittal}/>
+                <TransmittalDetails selectedTransmittal={this.state.selectedTransmittal} isTransmittalListLoading={this.state.isLoading}/>
             </AppContext.Provider>
         )
     }
