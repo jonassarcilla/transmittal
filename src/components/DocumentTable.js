@@ -45,7 +45,7 @@ export default class DocumentTable extends Component {
                 return { width: '20%', textAlign: 'center' };
               },
               formatter: function(cell, row, rowIndex){
-                return <a href={row.filepath}>
+                return <a href={row.filePath}>
                     <NoPrint>
                       <FaRegFilePdf style={{ fontSize: 20, color: 'red', marginRight: 5 }}/>
                     </NoPrint>
