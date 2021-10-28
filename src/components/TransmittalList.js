@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Moment from 'react-moment';
 
 import { AppContext } from '../contexts/AppContext';
 import { getTransmittalList } from '../services/api'
@@ -84,7 +85,10 @@ export default class TransmittalList extends Component {
                                 <h5>{transmittalInfo.sender}</h5>
                                 <p>{transmittalInfo.transmittalNo}</p>
                             </div>
-                            <div className="preview-header-date">{transmittalInfo.issued_date}<br/>{transmittalInfo.issued_time}</div>
+                            <div className="preview-header-date">
+                                <Moment date={transmittalInfo.issued_date} format="DD/MM/YY" /><br/>
+                                <Moment date={transmittalInfo.issued_date} format="HH:MM" />
+                            </div>
                         </div>
                         <div className="preview-content">
                             <h6>{transmittalInfo.subject}</h6>
