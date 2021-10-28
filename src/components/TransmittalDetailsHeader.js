@@ -13,6 +13,16 @@ import PrintProvider, { Print, NoPrint } from 'react-easy-print';
 export default class TransmittalDetailsHeader extends Component {
     static contextType = AppContext;
 
+    constructor(props) {
+		super(props);
+
+		this.state = {
+            isQRImgLoaded: false,
+            isCompanyImgLoaded: false,
+            isWindowsPrintLoaded: false
+		};
+	}
+
     renderCompanyLogo(){
         const appContextState = this.context.state;
 
@@ -41,6 +51,7 @@ export default class TransmittalDetailsHeader extends Component {
                 {...companyLogoProps}
                 src={company_img_url}
                 alt='Company Name'
+                onLoad={() => this.setState({isQRImgLoaded: true})}
             />
         }
     }
@@ -73,6 +84,7 @@ export default class TransmittalDetailsHeader extends Component {
                 {...qrCodeProps}
                 src={qr_code_url}
                 alt='QR Code'
+                onLoad={() => this.setState({isCompanyImgLoaded: true})}
             />
         }
     }
@@ -100,12 +112,18 @@ export default class TransmittalDetailsHeader extends Component {
                     </Link>
                 </NoPrint>
             } else {
-                return <IconButton className="printDocument" 
-                        iconProps={emojiIcon} 
-                        title="Print Transmittal" 
-                        ariaLabel="Print Transmittal" disabled={false} checked={false} 
-                        onClick={() => window.print()}
-                    />
+                if(this.state.isQRImgLoaded 
+                    && this.state.isCompanyImgLoaded){
+                    
+                    return <NoPrint>
+                        <IconButton className="printDocument" 
+                            iconProps={emojiIcon} 
+                            title="Print Transmittal" 
+                            ariaLabel="Print Transmittal" disabled={false} checked={false} 
+                            onClick={() => window.print()}
+                        />
+                    </NoPrint>
+                }
             }
         }
     }
@@ -123,6 +141,19 @@ export default class TransmittalDetailsHeader extends Component {
             }
 
             return <Label style={{fontSize: 24 }}>{ appContextState.selectedTransmittal.company_name || null } Transmittal</Label>
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        const appContextState = this.context.state;
+
+        if(this.state.isQRImgLoaded 
+            && this.state.isCompanyImgLoaded 
+            && appContextState.isPrintPreviewOnly 
+            && this.state.isWindowsPrintLoaded == false){
+            window.print();
+
+            this.setState({isWindowsPrintLoaded: true})
         }
     }
 

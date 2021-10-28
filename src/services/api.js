@@ -34,6 +34,10 @@ export function getTransmittalDetailsById(id) {
 	return apiClient.get(`/transmittals/${id}`);
 }
 
+export function getTransmittalDetailsByLink(transmittalNo) {
+	return apiClient.get(`/transmittals/?transmittalNo=${transmittalNo}`);
+}
+
 export function getFileToDownload(url, fileName){
     return fetch(url, {
         mode: 'no-cors' 

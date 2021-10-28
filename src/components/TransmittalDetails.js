@@ -50,10 +50,7 @@ export default class TransmittalDetails extends Component {
           <TransmittalDetailsHeader isLoading={this.state.isLoading}/>
           <TransmittalDetailsContent isLoading={this.state.isLoading} />
           <DocumentTable isLoading={this.state.isLoading}/>
-            {/* <TransmittalDetailsHeader />
-            <TransmittalDetailsContent />
-            <DocumentTable details={this.state.details}/> */}
-            <footer   className="">
+            <footer>
               <Label style={{fontSize: 16 }}>Disclaimer</Label>
               <cite style={{fontSize: 12}}>** The user agrees to use the drawings/data only for the purpose for which it was develop by Aurecon. A user of Aurecon drawings/data in electronic format accepts the associated risk of using it without taking reasonable measures to verify the accuracy thereof against the original un-editable version, available from Aurecon. Any discrepancy between the drawings/data and the contract shall be finally decided by the Engineer/Principal</cite>
             </footer>

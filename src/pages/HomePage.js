@@ -21,18 +21,12 @@ export default class HomePage extends Component {
 
     componentWillMount() {
         const params = queryString.parse(this.props.location.search),
-            tid = params.tid || null,
-            magicLink = params.magicLink || null;
+            tid = params.tid || null;
             
         if(tid){
             getUserByTransmittalId(tid).then((response) => {
                 const userInfo = response.data[0];
                 this.setState({ ...this.state, isLoading: false, userInfo: userInfo});
-            })
-        } else if(magicLink){
-            getUserByLink(magicLink).then((response) => {
-                const userInfo = response.data[0];
-                this.setState({ ...this.state, isLoading: false, userInfo: userInfo, isPrintPreviewOnly: true});
             })
         } else {
             // Go to Not Found
@@ -44,7 +38,6 @@ export default class HomePage extends Component {
         return (
             <AppContext.Provider value={this.state, this}> 
                 <AppLayout/>
-                {/* <TransmittalDetails user={transmittalDetails } printPreview="true"/> */}
             </AppContext.Provider>
         )
     }

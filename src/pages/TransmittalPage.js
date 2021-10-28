@@ -1,51 +1,46 @@
-import React, { memo, useState, useContext, useEffect } from 'react'
-import { UserContext } from '../contexts/UserContext';
-import { useLocation } from "react-router-dom";
-import requests from '../services/api';
-
+import React, { Component } from 'react'
+import queryString from 'query-string';
+import { AppContext } from '../contexts/AppContext';
+import { getTransmittalDetailsByLink, getTransmittalDetailsById } from '../services/api'
 import TransmittalDetails from '../components/TransmittalDetails';
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
+export default class TransmittalPage extends Component {
+    constructor(props) {
+		super(props);
 
-const TransmittalPage = () => {
-    const [user, setUser] = useState({isLoading:true, userInfo: null });
-    const [transmittalDetails, setTransmittalDetails] = useState({ isLoading: true, details: {} });
+		this.state = {
+			isLoading: true, 
+            selectedTransmittal: null,
+            isPrintPreviewOnly: true
+		};
+	}
 
-    let query = useQuery(),
-        tid = query.get("tid"),
-        magicLink = query.get("magicLink");
-
-    console.log(tid)
-    const getTransmittalData = () => {
+    componentWillMount() {
+        const params = queryString.parse(this.props.location.search),
+            tid = params.tid || null,
+            magicLink = params.magicLink || null;
+        
         if(tid){
-            requests.getTransmittalDetailsById(tid).then((response) => {
-                console.log(response);
-                setTransmittalDetails({isLoading:false, details: response.data })
-            }).catch((error) => {
-                console.log(error);
+            getTransmittalDetailsById(tid).then((response) => {
+                const selectedTransmittal = response.data;
+                this.setState({isLoading: false, selectedTransmittal: selectedTransmittal});
             })
-        } else if(magicLink) {
-            requests.getTransmittalDetailsByMagicLink(magicLink).then((response) => {
-                console.log(response);
-                setTransmittalDetails({isLoading:false, details: response.data })
-            }).catch((error) => {
-                console.log(error);
+        }
+        else if(magicLink){
+            getTransmittalDetailsByLink(magicLink).then((response) => {
+                const selectedTransmittal = response.data[0];
+                this.setState({isLoading: false, selectedTransmittal: selectedTransmittal});
             })
+        } else {
+            // Go to Not Found
         }
     }
 
-    useEffect(() => {
-        getTransmittalData();
-    },[]);
-    
-
-    return (
-        <UserContext.Provider value={[user, setUser]}>
-            <TransmittalDetails user={transmittalDetails } printPreview="true"/>
-        </UserContext.Provider>
-    )
+    render() {
+        return (
+            <AppContext.Provider value={this.state, this}>
+                <TransmittalDetails selectedTransmittal={this.state.selectedTransmittal}/>
+            </AppContext.Provider>
+        )
+    }
 }
-
-export default TransmittalPage
