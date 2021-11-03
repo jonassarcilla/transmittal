@@ -14,6 +14,13 @@ const apiClient = axios.create({
     }
 });
 
+export function getUserInfo() {
+    // mock only
+    // This should be obtain from session locale storage
+    const userId = 1;
+    return apiClient.get(`/users/?Id=${userId}`);
+}
+
 export function getUserByTransmittalId(tid) {
 	return apiClient.get(`/users/?uniqueId=${tid}`);
 }
@@ -31,7 +38,7 @@ export function getTransmittalList(projectId) {
 }
 
 export function getTransmittalDetailsById(id) {
-	return apiClient.get(`/transmittals/${id}`);
+	return apiClient.get(`/transmittals/?Id=${id}`);
 }
 
 export function getTransmittalDetailsByLink(transmittalNo) {

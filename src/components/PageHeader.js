@@ -19,7 +19,7 @@ export default class PageHeader extends Component {
                             </Placeholder>
                     } else {
                         const userInfo = appContext.state.userInfo;
-                        return <h2>Welcome, {userInfo.firstName} {userInfo.lastName}</h2>
+                        return <h2>Welcome, {userInfo.Name}</h2>
                     }
                 })()}
             </div>

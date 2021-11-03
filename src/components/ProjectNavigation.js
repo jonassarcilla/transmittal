@@ -25,15 +25,12 @@ export default class ProjectNavigation extends Component {
 	}
 
     getProjectsData(userInfo){
-        const appContext = this.context;
-
-        getProjects(userInfo.id).then((response) => {
+        getProjects(userInfo.Id).then((response) => {
             const projectList = response.data;
             this.setState({ isLoading: false, projectList: projectList });
 
             if(projectList.length > 0){
-                appContext.setState({selectedProject: projectList[0].id});
-                this.setState({selectedProjectId: projectList[0].id});
+                this.setState({selectedProjectId: projectList[0].Id});
             }
         })
         .catch((error) => {
@@ -114,14 +111,14 @@ export default class ProjectNavigation extends Component {
                                                 else {
                                                     return <ListGroup variant="flush">
                                                         {   
-                                                            this.state.projectList.map(({ id, title, transmittalCount }, index) => (
-                                                                <ListGroup.Item key={id} variant="primary"
-                                                                    onClick={(event) => this.selectProject(event, id)}
+                                                            this.state.projectList.map(({ Id, Title, TransmittalCount }, index) => (
+                                                                <ListGroup.Item key={Id} variant="primary"
+                                                                    onClick={(event) => this.selectProject(event, Id)}
                                                                     className={`${index === 0 ? "active" : ""}`}
                                                                 >
                                                                     <div className="d-flex justify-content-between">
-                                                                        <div className="projectName">{title}</div>
-                                                                        <Badge bg="dark">{transmittalCount}</Badge>
+                                                                        <div className="projectName">{Title}</div>
+                                                                        <Badge bg="dark">{TransmittalCount}</Badge>
                                                                     </div>
                                                                 </ListGroup.Item>
                                                             ))

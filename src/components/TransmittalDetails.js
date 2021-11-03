@@ -27,7 +27,7 @@ export default class TransmittalDetails extends Component {
       const currentTransmittal = this.props.selectedTransmittal;
 
       if(selectedTransmittal && currentTransmittal){
-          if(selectedTransmittal.id !== currentTransmittal.id){
+          if(selectedTransmittal.Id !== currentTransmittal.Id){
             this.setState({isLoading: true}, () => {
               setTimeout(function() {
                   this.setState({isLoading: false});
@@ -48,7 +48,7 @@ export default class TransmittalDetails extends Component {
     
     return (
       <PrintProvider>
-        <div className={`d-flex flex-column p-3 print-preview ${ appContextState.isPrintPreviewOnly === true ? "vh-100" : "vh-91"}`}>
+        <div className={`d-flex flex-column p-3 print-preview ${ appContextState.isPrintPreviewOnly === true ? "vh-100 mx-2" : "vh-91"}`}>
         {(() => {
             if(isTransmittalListLoading === false && selectedTransmittal === null) {
               return <div className="container py-5 px-3 text-center" style={{ width: '66vw'}}>
@@ -74,9 +74,9 @@ export default class TransmittalDetails extends Component {
               }
 
               return <>
-                <TransmittalDetailsHeader isLoading={this.state.isLoading}/>
-                <TransmittalDetailsContent isLoading={this.state.isLoading} />
-                <DocumentTable isLoading={this.state.isLoading}/>
+                <TransmittalDetailsHeader isLoading={this.state.isLoading} selectedTransmittal={selectedTransmittal}/>
+                <TransmittalDetailsContent isLoading={this.state.isLoading} selectedTransmittal={selectedTransmittal}/>
+                <DocumentTable isLoading={this.state.isLoading} selectedTransmittal={selectedTransmittal}/>
                 <footer>
                   <Label style={{fontSize: 16 }}>Disclaimer</Label>
                   <cite style={{fontSize: 12}}>** The user agrees to use the drawings/data only for the purpose for which it was develop by Aurecon. A user of Aurecon drawings/data in electronic format accepts the associated risk of using it without taking reasonable measures to verify the accuracy thereof against the original un-editable version, available from Aurecon. Any discrepancy between the drawings/data and the contract shall be finally decided by the Engineer/Principal</cite>

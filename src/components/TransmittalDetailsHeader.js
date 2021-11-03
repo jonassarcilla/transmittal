@@ -7,7 +7,7 @@ import { Placeholder } from 'react-bootstrap';
 
 import company_logo from '../images/company_logo.png';
 import qrcode_logo from '../images/QR_Code.png';
-import PrintProvider, { Print, NoPrint } from 'react-easy-print';
+import { NoPrint } from 'react-easy-print';
 
 
 export default class TransmittalDetailsHeader extends Component {
@@ -24,18 +24,18 @@ export default class TransmittalDetailsHeader extends Component {
 	}
 
     renderCompanyLogo(){
-        const appContextState = this.context.state;
+        const selectedTransmittal = this.props.selectedTransmittal;
 
         if(this.props.isLoading){
             return <Placeholder as="p" animation="wave" className="mt-2 mx-3">
                 <Placeholder xs={10} size="lg" bg="secondary" style={{ width: 30, height: 30 }}/>
             </Placeholder>
         } else {
-            if(appContextState.selectedTransmittal === null){
+            if(selectedTransmittal === null){
                 return false;
             }
 
-            const company_img_url = appContextState.selectedTransmittal.company_img_url || company_logo;
+            const company_img_url = selectedTransmittal.company_img_url || company_logo;
             const companyLogoProps = {
                 imageFit: ImageFit.center,
                 width: 40,
@@ -57,18 +57,18 @@ export default class TransmittalDetailsHeader extends Component {
     }
 
     renderQRCodeImg(){
-        const appContextState = this.context.state;
+        const selectedTransmittal = this.props.selectedTransmittal;
 
         if(this.props.isLoading){
             return <Placeholder as="p" animation="wave" className="mt-2">
                 <Placeholder xs={10} size="lg" bg="secondary" style={{ width: 60, height: 60 }}/>
             </Placeholder>
         } else {
-            if(appContextState.selectedTransmittal === null){
+            if(selectedTransmittal === null){
                 return false;
             }
 
-            const qr_code_url = appContextState.selectedTransmittal.qr_code_url || qrcode_logo
+            const qr_code_url = selectedTransmittal.qr_code_url || qrcode_logo
             const qrCodeProps = {
                 imageFit: ImageFit.center,
                 width: 60,
@@ -91,13 +91,15 @@ export default class TransmittalDetailsHeader extends Component {
 
     renderPrintPage() {
         const appContextState = this.context.state;
+        const selectedTransmittal = this.props.selectedTransmittal;
 
         if(this.props.isLoading){
             return <Placeholder as="p" animation="wave">
                 <Placeholder xs={10} size="lg" bg="secondary" style={{ width: 20, height: 20 }}/>
             </Placeholder>
         } else {
-            if(appContextState.selectedTransmittal === null){
+            
+            if(selectedTransmittal === null){
                 return false;
             }
 
@@ -107,7 +109,7 @@ export default class TransmittalDetailsHeader extends Component {
 
             if(appContextState.isPrintPreviewOnly == false){
                 return <NoPrint>
-                    <Link to={`/transmittal?tid=` + appContextState.selectedTransmittal.id } target="_blank" rel="noopener noreferrer">
+                    <Link to={`/transmittals?tid=` + selectedTransmittal.Id } target="_blank" rel="noopener noreferrer">
                         <IconButton className="printDocument" iconProps={emojiIcon} title="Print Transmittal" ariaLabel="Print Transmittal" disabled={false} checked={false} />
                     </Link>
                 </NoPrint>
@@ -129,18 +131,16 @@ export default class TransmittalDetailsHeader extends Component {
     }
 
     renderTransmittalTitle(){
-        const appContextState = this.context.state;
-
         if(this.props.isLoading){
             return <Placeholder as="p" animation="wave" className="mt-2">
                 <Placeholder xs={10} size="lg" bg="secondary" className="mx-2" style={{ width: 300, height: 25 }}/>
             </Placeholder>
         } else {
-            if(appContextState.selectedTransmittal === null){
+            if(this.props.selectedTransmittal === null){
                 return false;
             }
 
-            return <Label style={{fontSize: 24 }}>{ appContextState.selectedTransmittal.company_name || null } Transmittal</Label>
+            return <Label style={{fontSize: 24 }}>Aurecon Transmittal</Label>
         }
     }
 

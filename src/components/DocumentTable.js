@@ -33,13 +33,12 @@ export default class DocumentTable extends Component {
     }
 
     renderBootStrapTable(){
-        const appContextState = this.context.state;
-        const transmitalInfo = appContextState.selectedTransmittal;
+        const transmitalInfo = this.props.selectedTransmittal;
         const documents = transmitalInfo && this.props.isLoading === false ? transmitalInfo.documents: [];
 
         const columns = [
             {
-              dataField: 'fileName',
+              dataField: 'FileName',
               text: 'File Name',
               headerStyle: (colum, colIndex) => {
                 return { width: '20%', textAlign: 'center' };
@@ -54,35 +53,35 @@ export default class DocumentTable extends Component {
               }
             }, 
             {
-              dataField: 'title',
+              dataField: 'Title',
               text: 'Title',
               headerStyle: (colum, colIndex) => {
                 return { width: '30%', textAlign: 'center' };
               },
             },
             {
-              dataField: 'rev',
+              dataField: 'Revision',
               text: 'Rev',
               headerStyle: (colum, colIndex) => {
                 return { width: '10%', textAlign: 'center' };
               },
             },
             {
-              dataField: 'state',
+              dataField: 'Discipline',
               text: 'State',
               headerStyle: (colum, colIndex) => {
                 return { width: '10%', textAlign: 'center' };
               },
             },
             {
-              dataField: 'status',
+              dataField: 'Status',
               text: 'Status',
               headerStyle: (colum, colIndex) => {
                 return { width: '20%', textAlign: 'center' };
               },
             },
             {
-              dataField: 'size',
+              dataField: 'Size',
               text: 'Size',
               headerStyle: (colum, colIndex) => {
                 return { width: '7%', textAlign: 'center' };
@@ -92,7 +91,7 @@ export default class DocumentTable extends Component {
               }
             },
             {
-              dataField: 'id',
+              dataField: 'Id',
               text: '',
               headerClasses: 'no-print',
               classes: 'no-print',
@@ -103,8 +102,8 @@ export default class DocumentTable extends Component {
                 return <NoPrint>{column.text}</NoPrint>
               },
               formatter: function(cell, row, rowIndex){
-                const filePath = row.filePath;
-                const fileName = row.fileName;
+                const filePath = row.Path;
+                const fileName = row.FileName;
           
                 return <NoPrint>
                   <div style={{textAlign: 'center'}}>

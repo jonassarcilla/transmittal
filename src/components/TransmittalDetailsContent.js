@@ -9,7 +9,7 @@ export default class TransmittalDetailsContent extends Component {
     static contextType = AppContext;
 
     renderDetails(){
-        const appContextState = this.context.state;
+        const transmitalInfo = this.props.selectedTransmittal;
 
         if(this.props.isLoading){
             const placeHolderContent = Array.apply(null, {length: 5}).map((value, index) => {
@@ -29,11 +29,9 @@ export default class TransmittalDetailsContent extends Component {
                 </div>
             </div>
         } else {
-            if(appContextState.selectedTransmittal === null){
+            if(transmitalInfo === null){
                 return false;
             }
-
-            const transmitalInfo = appContextState.selectedTransmittal;
 
             return <div className="container-fluid">
                 <div className="row" style={{ minWidth: 250, fontSize: 14, border: '2px solid #313f52' }}>
@@ -54,8 +52,6 @@ export default class TransmittalDetailsContent extends Component {
     }
 
     render() {
-        const appContextState = this.context.state;
-
         return (
             <section className="py-3">
                 <div className="d-flex justify-content-between align-items-center">

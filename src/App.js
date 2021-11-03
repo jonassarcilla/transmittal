@@ -13,8 +13,8 @@ export default class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/transmittals" component={HomePage} />
-            <Route path="/transmittal" component={TransmittalPage} />
+            <Route exact path="/" component={HomePage} />
+            <Route path="/transmittals" component={TransmittalPage} />
             {/* <Route component={GenericNotFound} /> */}
           </Switch>
         </Router>

@@ -18,18 +18,18 @@ export default class TransmittalPage extends Component {
     componentWillMount() {
         const params = queryString.parse(this.props.location.search),
             tid = params.tid || null,
-            magicLink = params.magicLink || null;
+            mlink = params.mlink || null;
         
         if(tid){
             getTransmittalDetailsById(tid).then((response) => {
-                const selectedTransmittal = response.data;
+                const selectedTransmittal = response.data[0];
                 this.setState({isLoading: false, selectedTransmittal: selectedTransmittal});
             }).catch(response => {
                 this.setState({isLoading: false });
             });
         }
-        else if(magicLink){
-            getTransmittalDetailsByLink(magicLink).then((response) => {
+        else if(mlink){
+            getTransmittalDetailsByLink(mlink).then((response) => {
                 const selectedTransmittal = response.data[0];
 
                 if(selectedTransmittal){

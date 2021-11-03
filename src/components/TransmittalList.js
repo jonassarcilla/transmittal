@@ -30,7 +30,7 @@ export default class TransmittalList extends Component {
             this.setState({ isLoading: false, transmittalList: transmittalList, currentProjectId: projectId });
 
             if(transmittalList.length > 0){
-                appContext.setState({selectedTransmittal: transmittalList[0]});
+                this.setState({selectedTransmittal: transmittalList[0]});
             }
         })
         .catch((error) => {
@@ -87,7 +87,7 @@ export default class TransmittalList extends Component {
         return <ListGroup variant="flush">
             {this.state.transmittalList.map((transmittalInfo, index) => {
                 return (
-                    <ListGroup.Item key={index} variant="light"
+                    <ListGroup.Item key={transmittalInfo.Id} variant="light"
                         onClick={(event) => this.selectTransmittal(event, transmittalInfo)}
                         className={`py-3 ${index === 0 ? "active" : ""}`}
                     >
@@ -113,13 +113,11 @@ export default class TransmittalList extends Component {
 
     loadTransmittals(selectedProjectId) {
         if(selectedProjectId && this.state.isLoading){
-            const appContext = this.context;
             getTransmittalList(selectedProjectId).then((response) => {
                 const transmittalList = response.data
                 this.setState({ isLoading: false, transmittalList: transmittalList });
     
                 if(transmittalList.length > 0){
-                    appContext.setState({selectedTransmittal: transmittalList[0]});
                     this.setState({selectedTransmittal: transmittalList[0]})
                 }
             })

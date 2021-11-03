@@ -1,57 +1,56 @@
 {
     "users": [
         {
-            "id": "1",
-            "uniqueId": "0000-0000-0001",
-            "firstName": "Kimberly",
-            "lastName": "Morrisson",
-            "email": "kimberly.morrison@email.com"
-        },
-        {
-            "id": "2",
-            "uniqueId": "0000-0000-0002",
-            "firstName": "John",
-            "lastName": "Doe",
-            "email": "john.doe@email.com"
+            "Id": "1",
+            "Name": "Kimberly Morrisson",
+            "Email": "kimberly.morrison@email.com",
+            "Organisation": "Aurecon"
         }
     ],
+
     "projects": [
         {
-            "id": "1",
-            "uniqueId": "0000-0000-0001",
-            "title": "Aurecon Master Space",
-            "transmittalCount": 8,
+            "Id": "1",
+            "Title": "Aurecon Master Space",
+            "ConfigValue": "",
+            "Key": "D00000",
 
+            "TransmittalCount": 8,
             "userId": 1
         },
         {
-            "id": "2",
-            "uniqueId": "0000-0000-0002",
-            "title": "Aurecon Demo Space",
-            "transmittalCount": 1,
+            "Id": "2",
+            "Title": "Aurecon Demo Space",
+            "ConfigValue": "",
+            "Key": "D00000",
 
+            "TransmittalCount": 1,
             "userId": 1
         },
         {
-            "id": "3",
-            "uniqueId": "0000-0000-0003",
-            "title": "Aurecon Master Space Longer than usual",
-            "transmittalCount": 1000,
+            "Id": "3",
+            "Title": "Aurecon Demo Space Long",
+            "ConfigValue": "",
+            "Key": "D00000",
 
+
+            "TransmittalCount": 1,
             "userId": 1
         },
         {
-            "id": "4",
-            "uniqueId": "0000-0000-0004",
-            "title": "Aurecon Master Space",
-            "transmittalCount": 1000,
+            "Id": "1",
+            "Title": "Aurecon Master Space",
+            "Key": "D00000",
+            "ConfigValue": "",
+
+            "TransmittalCount": 8,
             "userId": 2
         }
     ],
     "transmittals": [
         {
             "projectId": "1",
-            "id": "1",
+            "Id": "1",
             "sender": "Kimber Morrison",
             "contact": "Eurich De Castro",
             "transmittalNo": "520123-TRN-000111",
@@ -63,34 +62,56 @@
             "company_name": "Aurecon",
             "project_name": "P0000-DTR-000",
             "projectFiles": "http://speedtest.tele2.net/1MB.zip",
+
             "documents": [
                 {
-                    "transmittalId": "1",
-                    "id": "1",
-                    "fileName": "P000-000-DTR-000.zip",
-                    "title": "Doc Title",
-                    "rev": "rev 0",
-                    "state": "SHR",
-                    "status": "PC Approved For",
-                    "size": "20",
-                    "filePath": "http://speedtest.tele2.net/1MB.zip"
+                    "Id": "1",
+                    "UniqueId": "",
+                    "FileName": "P000-000-DTR-000.zip",
+                    "Title": "Doc Title",
+                    "Extension": "pdf",
+                    "Path": "http://speedtest.tele2.net/1MB.zip",
+                    "Revision": "rev 0",
+                    "Discipline": "SHR",
+                    "DocumentType": "",
+                    "WBS": "",
+                    "WorkPackage": "",
+                    "Size": 23,
+                    "DocPath": "http://speedtest.tele2.net/1MB.zip",
+                    "ListName": "",
+                    "ListId": "",
+                    "Suitability": "",
+                    "IsSelected": false,
+
+
+                    "Status": "PC Approved For"
                 },
                 {
-                    "transmittalId": "1",
-                    "id": "2",
-                    "fileName": "P000-000-DTR-000.zip",
-                    "title": "Doc Title",
-                    "rev": "rev 0",
-                    "state": "SHR",
-                    "status": "PC Approved For",
-                    "size": "20",
-                    "filePath": "http://speedtest.tele2.net/1MB.zip"
+                    "Id": "2",
+                    "UniqueId": "",
+                    "FileName": "P000-000-DTR-000.zip",
+                    "Title": "Doc Title",
+                    "Extension": "pdf",
+                    "Path": "http://speedtest.tele2.net/1MB.zip",
+                    "Revision": "rev 0",
+                    "Discipline": "SHR",
+                    "DocumentType": "",
+                    "WBS": "",
+                    "WorkPackage": "",
+                    "Size": 23,
+                    "DocPath": "http://speedtest.tele2.net/1MB.zip",
+                    "ListName": "",
+                    "ListId": "",
+                    "Suitability": "",
+                    "IsSelected": false,
+
+                    "Status": "SO Started"
                 }
             ]
         },
         {
             "projectId": "1",
-            "id": "2",
+            "Id": "2",
             "transmittalNo": "520123-TRN-000222",
             "issue_date": "2021-10-14T11:09:42.6331575",
             "sender": "Kimber Morrison",
@@ -104,26 +125,47 @@
             "projectFiles": "http://speedtest.tele2.net/1MB.zip",
             "documents": [
                 {
-                    "transmittalId": "1",
-                    "id": "1",
-                    "fileName": "P000-000-DTR-000.zip",
-                    "title": "Doc Title",
-                    "rev": "rev 0",
-                    "state": "SHR",
-                    "status": "PC Approved For",
-                    "size": "20",
-                    "filePath": "http://speedtest.tele2.net/1MB.zip"
+                    "Id": "1",
+                    "UniqueId": "",
+                    "FileName": "P000-000-DTR-000.zip",
+                    "Title": "Doc Title",
+                    "Extension": "",
+                    "Path": "http://speedtest.tele2.net/1MB.zip",
+                    "Revision": "rev 0",
+                    "Discipline": "SHR",
+                    "DocumentType": "",
+                    "WBS": "",
+                    "WorkPackage": "",
+                    "Size": 23,
+                    "DocPath": "http://speedtest.tele2.net/1MB.zip",
+                    "ListName": "",
+                    "ListId": "",
+                    "Suitability": "",
+                    "IsSelected": false,
+
+
+                    "Status": "PC Approved For"
                 },
                 {
-                    "transmittalId": "1",
-                    "id": "2",
-                    "fileName": "P000-000-DTR-000.zip",
-                    "title": "Doc Title",
-                    "rev": "rev 0",
-                    "state": "SHR",
-                    "status": "PC Approved For",
-                    "size": "20",
-                    "filePath": "http://speedtest.tele2.net/1MB.zip"
+                    "Id": "2",
+                    "UniqueId": "",
+                    "FileName": "P000-000-DTR-000.zip",
+                    "Title": "Doc Title",
+                    "Extension": "",
+                    "Path": "http://speedtest.tele2.net/1MB.zip",
+                    "Revision": "rev 0",
+                    "Discipline": "SHR",
+                    "DocumentType": "",
+                    "WBS": "",
+                    "WorkPackage": "",
+                    "Size": 23,
+                    "DocPath": "http://speedtest.tele2.net/1MB.zip",
+                    "ListName": "",
+                    "ListId": "",
+                    "Suitability": "",
+                    "IsSelected": false,
+
+                    "Status": "SO Started"
                 }
             ]
         }
