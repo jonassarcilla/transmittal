@@ -36,15 +36,15 @@ export default class TransmittalDetailsContent extends Component {
             return <div className="container-fluid">
                 <div className="row" style={{ minWidth: 250, fontSize: 14, border: '2px solid #313f52' }}>
                 <div className="col-12 col-md-12 col-lg-6">
-                    <p style={{ marginBottom: '0.5em'}}><b>Transmittal:</b> <span>{transmitalInfo.transmittalNo}</span></p>
-                    <p style={{ marginBottom: '0.5em'}}><b>Sent By:</b> <span>{transmitalInfo.sender}</span></p>
-                    <p style={{ marginBottom: '0.5em'}}><b>Project:</b> <span>{transmitalInfo.project_name}</span></p>
-                    <p style={{ marginBottom: '0.5em'}}><b>Issued On:</b> <span><Moment date={transmitalInfo.issue_date} format="MMMM DD, YYYY" /><br/></span></p>
-                    <p style={{ marginBottom: '0.5em'}}><b>Key Contact:</b> <span>{transmitalInfo.contact}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Transmittal:</b> <span>{transmitalInfo.UniqueId}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Sent By:</b> <span>{transmitalInfo.Sender}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Project:</b> <span>{transmitalInfo.ProjectTitle}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Issued On:</b> <span><Moment date={transmitalInfo.IssueDate} format="MMMM DD, YYYY" /><br/></span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Key Contact:</b> <span>{transmitalInfo.Contact}</span></p>
                 </div>
                 <div className="col-12 col-md-12 col-lg-6">
-                    <p style={{ marginBottom: '0.5em'}}><b>Subject:</b> <span>{transmitalInfo.subject}</span></p>
-                    <p style={{ marginBottom: '0.5em'}}><b>Message:</b> <span>{transmitalInfo.message}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Subject:</b> <span>{transmitalInfo.Subject}</span></p>
+                    <p style={{ marginBottom: '0.5em'}}><b>Message:</b> <span>{transmitalInfo.Message}</span></p>
                 </div>
                 </div>
             </div>

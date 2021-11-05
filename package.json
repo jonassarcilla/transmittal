@@ -10,6 +10,7 @@
     "@uifabric/react-cards": "^0.116.10",
     "axios": "^0.23.0",
     "bootstrap": "^5.1.1",
+    "concurrently": "^6.3.0",
     "json-server": "^0.17.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
@@ -24,8 +25,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "concurrently \"json-server --watch db.json --port 3004 --d 1500\" \"react-scripts start\"",
+    "build": "concurrently \"json-server --watch db.json --port 3004 --d 1500\" \"react-scripts build\"",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "json:server": "json-server --watch db.json --port 3004 --d 1500"

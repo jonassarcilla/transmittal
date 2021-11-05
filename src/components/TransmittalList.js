@@ -93,8 +93,8 @@ export default class TransmittalList extends Component {
                     >
                         <div className="d-flex justify-content-between preview-header">
                             <div>
-                                <h5>{transmittalInfo.sender}</h5>
-                                <p>{transmittalInfo.transmittalNo}</p>
+                                <h5>{transmittalInfo.Sender}</h5>
+                                <p>{transmittalInfo.UniqueId}</p>
                             </div>
                             <div className="preview-header-date">
                                 <Moment date={transmittalInfo.issued_date} format="DD/MM/YY" /><br/>
@@ -102,8 +102,8 @@ export default class TransmittalList extends Component {
                             </div>
                         </div>
                         <div className="preview-content">
-                            <h6>{transmittalInfo.subject}</h6>
-                            <p>{transmittalInfo.message}</p>
+                            <h6>{transmittalInfo.Subject}</h6>
+                            <p>{transmittalInfo.Message}</p>
                         </div>
                     </ListGroup.Item>
                 )

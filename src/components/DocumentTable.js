@@ -149,7 +149,7 @@ export default class DocumentTable extends Component {
         const documents = transmitalInfo && this.props.isLoading === false ? transmitalInfo.documents: [];
 
         documents.map((document, index) => {
-          getFileToDownload(document.filePath, document.fileName).then(
+          getFileToDownload(document.Path, document.FileName).then(
             response => {
               console.log(response);
           });

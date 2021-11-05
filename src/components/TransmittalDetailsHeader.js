@@ -35,7 +35,7 @@ export default class TransmittalDetailsHeader extends Component {
                 return false;
             }
 
-            const company_img_url = selectedTransmittal.company_img_url || company_logo;
+            const CompanyImgUrl = selectedTransmittal.CompanyImgUrl || company_logo;
             const companyLogoProps = {
                 imageFit: ImageFit.center,
                 width: 40,
@@ -49,7 +49,7 @@ export default class TransmittalDetailsHeader extends Component {
 
             return <Image
                 {...companyLogoProps}
-                src={company_img_url}
+                src={CompanyImgUrl}
                 alt='Company Name'
                 onLoad={() => this.setState({isQRImgLoaded: true})}
             />
@@ -68,7 +68,7 @@ export default class TransmittalDetailsHeader extends Component {
                 return false;
             }
 
-            const qr_code_url = selectedTransmittal.qr_code_url || qrcode_logo
+            const QRCodeUrl = selectedTransmittal.QRCodeUrl || qrcode_logo
             const qrCodeProps = {
                 imageFit: ImageFit.center,
                 width: 60,
@@ -82,7 +82,7 @@ export default class TransmittalDetailsHeader extends Component {
 
             return <Image
                 {...qrCodeProps}
-                src={qr_code_url}
+                src={QRCodeUrl}
                 alt='QR Code'
                 onLoad={() => this.setState({isCompanyImgLoaded: true})}
             />
